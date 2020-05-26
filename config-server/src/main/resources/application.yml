@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          searchPaths: respo
+          username: 771712024@qq.com
+          password: tianluye0511
+          uri: https://github.com/tianluye/config-server/
+      label: master
+server:
+  port: 8768
+
+# 多配置几个 config-server 可以做集群，可以进行负载均衡
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

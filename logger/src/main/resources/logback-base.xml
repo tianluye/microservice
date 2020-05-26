@@ -1,0 +1,46 @@
+<included>
+    <!-- <appender>是 <configuration>的子节点，是负责写日志的组件。 -->
+    <!-- appender.name: 指定appender名称 -->
+    <!-- appender.class: 指定appender的全限定名 -->
+    <!-- Console 输出设置 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- appender.encoder: 对日志进行格式化。(不推荐使用 layout，encoder包含前者功能) -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder" charset="UTF-8">
+            <pattern>
+                %red(%clr(%d{yyyy-MM-dd HH:mm:ss.SSS})){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} logTag: %logTag %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(Line %L:){faint} %m %n
+            </pattern>
+        </encoder>
+        <!-- appender.target: 字符串 System.out 或者 System.err ，默认 System.out。 -->
+        <target>
+            System.out
+        </target>
+    </appender>
+
+    <!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!-- 指定过滤器 -->
+        <filter class="com.tly.logger.filter.ThresholdMoreFilter">
+            <level>INFO</level>
+        </filter>
+
+        <!-- 被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。 -->
+        <!-- 若 appender.file 存在，那么 appender.rollingPolicy.FileNamePattern将不会生效。一般使用后者 -->
+        <!--<file>/b/a.log</file>-->
+
+        <!-- 当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名。 -->
+        <!-- SizeAndTimeBasedRollingPolicy: 它根据时间和文件大小来制定滚动策略，既负责滚动也负责触发滚动 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 日志文件输出的文件名，[%i] 这个随机数参数必须存在 -->
+            <FileNamePattern>${LOG_HOME}/tly-log.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!-- 日志文件保留天数 -->
+            <MaxHistory>15</MaxHistory>
+            <maxFileSize>30MB</maxFileSize>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder" charset="UTF-8">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+</included>

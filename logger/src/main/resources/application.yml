@@ -1,0 +1,9 @@
+# 也可以不指定，Spring会默认加载类路径下的名字为 logback-spring.xml 配置文件
+logging:
+  config: classpath:logback-spring.xml
+#spring:
+#  profiles:
+#    active: sit
+#
+#sit:
+#  console: true
