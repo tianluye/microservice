@@ -66,12 +66,14 @@ public class LoggerAop {
     }
 
     private void setCommonMDC(ProceedingJoinPoint point, TlyLogCenter logCenter) {
-        //LogTag
+        // LogTag
         if (StringUtils.isNotEmpty(logCenter.logTag())) {
             MDC.put(LogFormat.MDC_LOG_TAG, logCenter.logTag());
         }
         if (StringUtils.isNotEmpty(logCenter.bizID())) {
-            MDC.put(LogFormat.MDC_BIZ_ID, logCenter.bizID());
+            if (StringUtils.isEmpty(MDC.get(LogFormat.MDC_BIZ_ID))) {
+                MDC.put(LogFormat.MDC_BIZ_ID, logCenter.bizID());
+            }
         }
         //customLog1
         if (StringUtils.isNotEmpty(logCenter.customLog1())) {

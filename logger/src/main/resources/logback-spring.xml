@@ -25,6 +25,7 @@
 
     <!-- 自定义 pattern转换规则 -->
     <conversionRule conversionWord="logTag" converterClass="com.tly.logger.convert.LogTagConvert"/>
+    <conversionRule conversionWord="bizID" converterClass="com.tly.logger.convert.BizIDConvert"/>
 
     <!-- 读取 Spring里的配置参数，可以指定默认值 -->
     <springProperty scope="context" name="profiles" source="spring.profiles.active"/>

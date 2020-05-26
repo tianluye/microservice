@@ -1,28 +1,34 @@
 package com.tly.logger.service;
 
+import com.tly.logger.LogFormat;
 import com.tly.logger.TlyLogCenter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.invoke.MethodHandles;
 import java.util.Objects;
 
 @Service
-@TlyLogCenter(logTag = "Tly-LoggerService")
+@TlyLogCenter(logTag = "aaa")
 public class LoggerServiceImpl implements LoggerService {
 
     private Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    @Autowired
+    private LoggerService loggerService;
+
     @Override
-    @TlyLogCenter(bizID = "biz-00001")
+    @TlyLogCenter(bizID = "biz-1")
     public void infoLogOne() {
         logger.info("方法[infoLogOne]开始打印日志...");
-        this.infoLogTwo();
+        loggerService.infoLogTwo();
         logger.info("方法[infoLogOne]结束打印日志...");
     }
 
     @Override
+    @TlyLogCenter(bizID = "biz-2")
     public void infoLogTwo() {
         logger.info("方法[infoLogTwo]开始打印日志...");
         try {
@@ -31,6 +37,7 @@ public class LoggerServiceImpl implements LoggerService {
             e.printStackTrace();
         }
         logger.info("方法[infoLogTwo]结束打印日志...");
+        logger.info("asd....", LogFormat.builder().logTag("get.user").build());
     }
 
     @Override

@@ -7,7 +7,7 @@
         <!-- appender.encoder: 对日志进行格式化。(不推荐使用 layout，encoder包含前者功能) -->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder" charset="UTF-8">
             <pattern>
-                %red(%clr(%d{yyyy-MM-dd HH:mm:ss.SSS})){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} logTag: %logTag %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(Line %L:){faint} %m %n
+                %red(%clr(%d{yyyy-MM-dd HH:mm:ss.SSS})){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} logTag: %logTag bizID: %bizID %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(Line %L:){faint} %m %n
             </pattern>
         </encoder>
         <!-- appender.target: 字符串 System.out 或者 System.err ，默认 System.out。 -->
