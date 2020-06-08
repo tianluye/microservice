@@ -8,6 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.core.type.ClassMetadata;
+import org.springframework.core.type.StandardAnnotationMetadata;
+import org.springframework.core.type.StandardClassMetadata;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -36,6 +40,8 @@ public class LoggerTest {
     public void testTwo() {
         String result = loggerService.loggerFormat("mainPackage.sub.sample.Bar", 30);
         System.out.println("------" + result + "------");
+        AnnotationMetadata metadata = AnnotationMetadata.introspect(LoggerTest.class);
+        metadata.getAnnotationTypes().forEach(System.out::println);
     }
 
 }

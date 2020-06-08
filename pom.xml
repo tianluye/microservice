@@ -31,6 +31,7 @@
         <module>guice</module>
         <module>kafka</module>
         <module>logger</module>
+        <module>design-pattern</module>
     </modules>
 
 	<dependencies>
