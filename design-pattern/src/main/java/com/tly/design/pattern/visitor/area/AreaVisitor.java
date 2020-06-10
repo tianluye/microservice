@@ -9,10 +9,6 @@ import com.tly.design.pattern.visitor.master.Rectangle;
  */
 public class AreaVisitor implements IVisitor {
 
-    public AreaVisitor() {
-
-    }
-
     @Override
     public void visitor(Rectangle rectangle) {
         int area = rectangle.getX() * rectangle.getY();
